@@ -3,15 +3,21 @@
 namespace PwcCodeChallenge {
     public class Program {
         public static void Main (String[] args) {
-            string phrase = "Hello, World! OpenAI is amazing.";
-            //string phrase = Console.ReadLine();
-            Console.WriteLine(PhraseInverter(phrase));
-            phrase = "Hello, World!";
-            Console.WriteLine(RemoveDuplicatedChars(phrase));
-            phrase = "babad";
-            Console.WriteLine(PalindromeSubStr(phrase));
-            phrase = "racecar";
-            Console.WriteLine(IsPalindrome(phrase));
+            //string phrase = "Hello, World! OpenAI is amazing.";
+            string phrase = Console.ReadLine();
+            Console.WriteLine(PhraseInverter(phrase)); //challenge 1
+            //phrase = "Hello, World!";
+            phrase = Console.ReadLine();
+            Console.WriteLine(RemoveDuplicatedChars(phrase)); //challenge 2
+            //phrase = "babad";
+            phrase = Console.ReadLine();
+            Console.WriteLine(PalindromeSubStr(phrase)); //challenge 3
+            //phrase = "hello. how are you? i'm fine, thank you.";
+            phrase = Console.ReadLine();
+            Console.WriteLine(Challenge4(phrase)); //challenge 4
+            //phrase = "racecar";
+            phrase = Console.ReadLine();
+            Console.WriteLine(IsPalindrome(phrase)); //challenge 5
         }
 
         public static string PhraseInverter(string phrase) {
@@ -68,6 +74,35 @@ namespace PwcCodeChallenge {
             else {
                 return "A palavra não é palíndroma";
             }
+        }
+
+        public static string Challenge4(string phrase) {
+            phrase = phrase.Trim();
+            string aux1 = phrase[0].ToString().ToUpper();
+            bool test = false;
+
+            for (int i = 1; i < phrase.Length; i++) {
+                if (phrase[i] == '.' || phrase[i] == '!' || phrase[i] == '?') {
+                    aux1 += phrase[i];
+                    test = true;
+                    if (phrase.Length - i >= 2) {
+                        aux1 += phrase[i + 1];
+                        i++;
+                    }
+                }
+                else if (test == true && phrase[i] == ' ') { //in case there is more than one space after '.', '!' or '?';
+                    aux1 += phrase[i];
+                }
+                else if (test == true && phrase[i] != ' ') {
+                    aux1 += phrase[i].ToString().ToUpper();
+                    test = false;
+                }
+                else {
+                    aux1 += phrase[i];
+                    test = false;
+                }
+            }
+            return aux1;
         }
 
         public static bool IsPalindrome (string word) {
